@@ -1,12 +1,8 @@
 <?php
-/**
- * Componente text
- */
 
 class notes extends base_component implements components_interface {
 
 	public function make_notes() : string {
-		global $_ITE, $_ITEC;
 		$html = '';
 
 		if( isset( $_REQUEST['d'] ) ) { // Es el detalle de una línea de tabla
@@ -15,7 +11,7 @@ class notes extends base_component implements components_interface {
 			$data = [
 				'table' => 'reports',
 				'id' => $this -> component_info['reports_id'],
-				'dsn' => $_ITEC -> info()['dsn']
+				'dsn' => $this -> _ITEC -> info()['dsn']
 			];
 		}
 		?>
@@ -32,7 +28,7 @@ class notes extends base_component implements components_interface {
                 <?php
                 
                 //$aux = $_ITEC_temp -> select($data['table'], '*')[0];
-                $msgs = $_ITEC -> select('system__notes', '*', ['linked_table' => $data['table'], 'linked_id' => $data['id'], 'linked_dsn' => $data['dsn'], 'ORDER' => ['system__notes_id' => 'DESC']]);
+                $msgs = $this -> _ITEC -> select('system__notes', '*', ['linked_table' => $data['table'], 'linked_id' => $data['id'], 'linked_dsn' => $data['dsn'], 'ORDER' => ['system__notes_id' => 'DESC']]);
 
                 if($msgs){ 
                     foreach( $msgs as $msg ){
@@ -43,11 +39,11 @@ class notes extends base_component implements components_interface {
                                     <div class="bg-primary rounded py-2 px-3 mb-2">
                                         <p class="text-small mb-0 white"><?=$msg['message']?></p>
                                     </div>
-                                    <p class="small text-muted"><?=$_ITE -> funcs -> date_format( $msg['date'], 6)?> | <?=$_ITE -> funcs -> date_format( $msg['date'], 2, ' de ')?></p>
+                                    <p class="small text-muted"><?=$this -> _ITE -> funcs -> date_format( $msg['date'], 6)?> | <?=$this -> _ITE -> funcs -> date_format( $msg['date'], 2, ' de ')?></p>
                                 </div>
                             </div>
                         <?php } else { 
-                            $user = $_ITEC -> get( 'users', 'user', ['users_id' => $msg['users_id']] ); 
+                            $user = $this -> _ITEC -> get( 'users', 'user', ['users_id' => $msg['users_id']] ); 
                             ?>
                             <!-- Mensaje ajeno -->
                             <div class="media w-75 mb-3"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle" title="<?=$user?>">
@@ -55,7 +51,7 @@ class notes extends base_component implements components_interface {
                                     <div class="bg-light rounded py-2 px-3 mb-2">
                                         <p class="text-small mb-0 text-muted"><?=$msg['message']?></p>
                                     </div>
-                                    <p class="small text-muted"><?=$_ITE -> funcs -> date_format( $msg['date'], 6)?> | <?=$_ITE -> funcs -> date_format( $msg['date'], 2)?></p>
+                                    <p class="small text-muted"><?=$this -> _ITE -> funcs -> date_format( $msg['date'], 6)?> | <?=$this -> _ITE -> funcs -> date_format( $msg['date'], 2)?></p>
                                 </div>
                             </div>
                         <?php } 
