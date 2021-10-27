@@ -28,7 +28,7 @@ class notes extends base_component implements components_interface {
                 <?php
                 
                 //$aux = $_ITEC_temp -> select($data['table'], '*')[0];
-                $msgs = $this -> _ITEC -> select('system__notes', '*', ['linked_table' => $data['table'], 'linked_id' => $data['id'], 'linked_dsn' => $data['dsn'], 'ORDER' => ['system__notes_id' => 'DESC']]);
+                $msgs = $this -> _ITEC -> select('system__notes', '*', ['linked_table' => $data['table'], 'linked_id' => $data['id'], 'linked_dsn' => $data['dsn'], 'ORDER' => ['system__notes_id' => 'ASC']]);
 
                 if($msgs){ 
                     foreach( $msgs as $msg ){
