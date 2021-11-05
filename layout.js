@@ -11,7 +11,8 @@ $(document).on('keypress','.notes__input',function(e){
             url: '/ajax',
             data: 'DEBUG=0&action=table/save-note&d='+d+'&msg='+msg,
             success: function(data){
-                that.closest('.component').find('.notes__box').prepend(data);
+                that.closest('.component').find('.notes__box').append(data);
+                //reload_component(component);
             }
         });
     }
@@ -28,7 +29,8 @@ $(document).on('click','.notes__btn',function(e){
         url: '/ajax',
         data: 'DEBUG=0&action=table/save-note&d='+d+'&msg='+msg,
         success: function(data){
-            that.closest('.component').find('.notes__box').prepend(data);
+            //that.closest('.component').find('.notes__box').append(data);
+            reload_component(component);
         }
     });
 });
