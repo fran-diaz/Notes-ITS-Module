@@ -12,6 +12,7 @@ $(document).on('keypress','.notes__input',function(e){
             data: 'DEBUG=0&action=table/save-note&d='+d+'&msg='+msg,
             success: function(data){
                 that.closest('.component').find('.notes__box').append(data);
+                that.val('');
                 //reload_component(component);
             }
         });
